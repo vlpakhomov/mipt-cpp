@@ -9,10 +9,10 @@ String::String(char const* s): sz(strlen(s)), cap(sz), data(new char[cap]) {
     std::copy(s, s + sz, data);
 }
 
-String::String(const String& s): sz(s.sz), cap(s.cap), data(new char[cap]) {
+String::String(String const& s): sz(s.sz), cap(s.cap), data(new char[cap]) {
 	std::copy(s.data, s.data + s.sz, data);
 }
-String& String::operator=(const String& s) {
+String& String::operator=(String const& s) {
 	String copy = s;
 	Swap(copy);
     return *this;
@@ -122,7 +122,7 @@ char const* String::Data() const {
     return data;
 }
 
-bool operator<(const String& s1, const String& s2) {
+bool operator<(String const& s1, String const& s2) {
     size_t sz1 = s1.Size();
     size_t sz2 = s2.Size();
     for (int i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
@@ -134,16 +134,16 @@ bool operator<(const String& s1, const String& s2) {
     }
     return sz1 < sz2;
 }
-bool operator>(const String& s1, const String& s2) {
+bool operator>(String const& s1, String const& s2) {
     return s2 < s1;
 }
-bool operator<=(const String& s1, const String& s2) {
-    return !(s1 > s2)    
+bool operator<=(String const& s1, String const& s2) {
+    return !(s1 > s2);
 }
-bool operator>=(const String& s1, const String& s2) {
+bool operator>=(String const& s1, String const& s2) {
     return !(s1 < s2);
 }
-bool operator==(const String& s1, const String& s2) {
+bool operator==(String const& s1, String const& s2) {
     size_t sz1 = s1.Size();
     size_t sz2 = s2.Size();
     for (int i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
@@ -153,11 +153,11 @@ bool operator==(const String& s1, const String& s2) {
     }
     return sz1 != sz2;
 }
-bool operator!=(const String& s1, const String& s2) {
+bool operator!=(String const& s1, String const& s2) {
     return !(s1 == s2);
 }
 
-String& String::operator+=(const String& s) {
+String& String::operator+=(String const& s) {
     size_t new_sz = sz + s.Size();
     if (new_sz > cap) {
         Reserve(new_sz * 2);
@@ -166,9 +166,10 @@ String& String::operator+=(const String& s) {
         data[i] = s[i];
     }
     sz = new_sz;
+    return *this;
 }
 
-String operator+(const String& s1, const String& s2) {
+String operator+(String const& s1, String const& s2) {
     String copy = s1;
     copy += s2;
     return copy;
@@ -184,7 +185,7 @@ String& String::operator*=(size_t n) {
     
 }
 
-std::ostream& operator<<(std::ostream& out, const String& s) {
+std::ostream& operator<<(std::ostream& out, String const& s) {
     size_t sz = s.Size();
     for (size_t i = 0; i < sz; ++i) {
         out << s;
@@ -213,5 +214,61 @@ std::istream& operator>>(std::istream& in, String& s) {
 
     in.width(0); 
     return in;  
+}
+
+std::vector<String> String::Split(String const& delim) const {
+    size_t pos_start = 0, pos_end, delim_len = delim.Size();
+    String token;
+    std::vector<String> tmp;
+
+    while ((pos_end = (*this).Find(delim, pos_start)) != std::string::npos) {
+        token = (*this).Substr(pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        tmp.push_back(token);
+    }
+
+    tmp.push_back((*this).Substr(pos_start));
+    return tmp;
+}
+    
+String String::Join(const std::vector<String>& strings) const {
+    size_t n = strings.size();
+    if (n == 0) return String("");
+    size_t len = 0;
+    for (size_t i = 0; i < n; ++i) {
+        len += strings[i].Size();
+    }
+    String tmp;
+    tmp.Reserve(len + (n - 1) * sz);
+    for (size_t i = 0; i < n; ++i) {
+        tmp += strings[i];
+        if (i != n - 1) {
+            tmp += *this;
+        }
+    }
+    return tmp;
+}
+
+size_t String::Find(const String& s, size_t pos) const {
+  size_t start;
+  size_t j;
+  for (size_t i = pos; i < sz - 1; ++i) {
+    start = i;
+    j = 0;
+      for (; j < s.Size() && (i + j) < sz - 1; ++j) {
+        if (data[i + j] != s[j]) break;
+      }
+      if (j == s.Size()) return start;
+  }
+  return (s.Size() ? std::string::npos : 0);
+}
+
+String String::Substr(size_t pos, size_t count) const {
+  if (count > sz - 1 - pos) return String(data + pos);
+  char c = data[pos + count];
+  data[pos + count] = '\0';
+  String copy(data + pos);
+  data[pos + count] = c;
+  return copy;
 }
 
