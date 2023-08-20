@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <iostream>
-
 class String {
 private:
     size_t sz = 0;
@@ -51,6 +48,9 @@ public:
     char* Data();
     char const* Data() const;
 
+    String& operator+=(const String& s);
+
+    String& operator*=(size_t n); 
 };
 
 bool operator<(String const& s1, String const& s2);

@@ -1,5 +1,4 @@
-#include <algorithm>
-#include <iostream>
+#include "string.hpp"
 
 
 String::String(size_t n, char c): sz(n), cap(sz), data(new char[cap]) {
@@ -13,10 +12,10 @@ String::String(char const* s): sz(strlen(s)), cap(sz), data(new char[cap]) {
 String::String(const String& s): sz(s.sz), cap(s.cap), data(new char[cap]) {
 	std::copy(s.data, s.data + s.sz, data);
 }
-String::String& operator=(const String& s) {
+String& String::operator=(const String& s) {
 	String copy = s;
-	swap(copy);
-	return *this;
+	Swap(copy);
+    return *this;
 }
 String::~String() {
     delete[] data;
@@ -82,25 +81,25 @@ void String::Swap(String& s) {
     std::swap(data, s.data);
 }
 
-char& operator[](size_t idx) {
+char& String::operator[](size_t idx) {
     return data[idx];
 }
 
-const char& operator[](size_t idx) const{
+const char& String::operator[](size_t idx) const{
     return data[idx];
 }
 
-char& Front() {
+char& String::Front() {
   return data[0];
 }
-const char& Front() const {
+const char& String::Front() const {
   return data[0];
 }
 
-char& Back() 
+char& String::Back() {
   return data[sz - 1];
 }
-const char& Back() const {
+const char& String::Back() const {
   return data[sz - 1];
 }
 
@@ -175,8 +174,18 @@ String operator+(const String& s1, const String& s2) {
     return copy;
 }
 
+String& String::operator*=(size_t n) {
+    Reserve(n * sz);
+    for (size_t i = 1; i < n; ++i) {
+        std::copy(data, data + sz, data + i * sz);
+    }
+    sz *= n;
+    return *this;
+    
+}
+
 std::ostream& operator<<(std::ostream& out, const String& s) {
-    size_t sz = s.length();
+    size_t sz = s.Size();
     for (size_t i = 0; i < sz; ++i) {
         out << s;
     }
@@ -184,6 +193,25 @@ std::ostream& operator<<(std::ostream& out, const String& s) {
 }
 
 std::istream& operator>>(std::istream& in, String& s) {
+    std::istream::sentry snt(in); 
+    if (snt) {
+        s.Clear();
 
+        std::streamsize n = in.width();
+        if (n == 0) n = std::numeric_limits<std::streamsize>::max() ;
+
+        char c;
+        while (in.get(c)) 
+        {
+            s.PushBack(c);
+
+            if (--n == 0) break;
+            if (in.peek() == std::istream::traits_type::eof()) break; 
+            if (std::isspace(in.peek(), in.getloc())) break; 
+        }
+    }
+
+    in.width(0); 
+    return in;  
 }
 
