@@ -33,9 +33,10 @@ String& String::operator=(String const& str) {
 String::~String() { delete[] data_; }
 
 void String::Clear() { sz_ = 0; }
+
 void String::PushBack(char chr) {
   if (sz_ == cap_) {
-    Reserve(sz_ * 2);
+    Reserve(sz_ == 0 ? 1 : sz_ * 2);
   }
   data_[sz_] = chr;
   ++sz_;
@@ -112,7 +113,7 @@ char const* String::Data() const { return data_; }
 bool operator<(String const& str1, String const& str2) {
   size_t sz1 = str1.Size();
   size_t sz2 = str2.Size();
-  for (int i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
+  for (size_t i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
     if (str1[i1] < str2[i2]) {
       return true;
     }
@@ -132,7 +133,7 @@ bool operator>=(String const& str1, String const& str2) {
 bool operator==(String const& str1, String const& str2) {
   size_t sz1 = str1.Size();
   size_t sz2 = str2.Size();
-  for (int i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
+  for (size_t i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
     if (str1[i1] != str2[i2]) {
       return false;
     }
@@ -148,7 +149,7 @@ String& String::operator+=(String const& str) {
   if (new_sz > cap_) {
     Reserve(new_sz * 2);
   }
-  for (int i = sz_; i < new_sz; ++i) {
+  for (size_t i = sz_; i < new_sz; ++i) {
     data_[i] = str[i];
   }
   sz_ = new_sz;
