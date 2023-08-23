@@ -18,21 +18,18 @@ Probably, I will add other useful and more complex features to this implementati
 
 - Implementation encapsulation principle using class methods.
 - Implementation information hiding principle using access specifiers.
+- Use clang-tidy linter for static code analysis.
 
 <p align="right"><a href="#string">Back to top ⬆️</a></p>
 
 <a id="table_of_contents"></a>
 ## 🗂️ Table of Contents 
-- [string](#string)
-- [🏷️ Description](#️-description)
-- [🎯 Solutions and Techniques](#-solutions-and-techniques)
-- [🗂️ Table of Contents](#️-table-of-contents)
-- [📄 Task](#-task)
-- [String](#string-1)
-  - [Details](#details)
-  - [Notes](#notes)
-- [📌 To do](#-to-do)
-- [📫 Contact](#-contact)
+- [Description](#️-description)
+- [Solutions and Techniques](#-solutions-and-techniques)
+- [Table of Contents](#️-table-of-contents)
+- [Task](#-task)
+- [To do](#-to-do)
+- [Contact](#-contact)
 
 
 <p align="right"><a href="#string">Back to top ⬆️</a></p>

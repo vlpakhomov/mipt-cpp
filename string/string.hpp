@@ -1,81 +1,84 @@
-#include <cstring>
-#include <locale>
-#include <limits>
+#pragma once
+// Copyright 2023 Vladislav Pakhomov
+
 #include <istream>
+#include <limits>
 #include <vector>
-#include <iostream>
 
 class String {
-private:
-    size_t sz = 0;
-    size_t cap = 0;
-    char* data = nullptr;
-public:
-    String() = default; 
+ public:
+  static size_t const kNpos = std::numeric_limits<size_t>::max();
 
-    String(size_t n, char c);
+  String() = default;
 
-    String(char const* new_data);
+  String(size_t num, char chr);
 
-	String(String const& s);
-	String& operator=(String const& s);
-    ~String();
+  explicit String(char const* str);
 
-    void Clear();
+  String(String const& str);
+  String& operator=(String const& str);
+  ~String();
 
-    void PushBack(char c);
+  void Clear();
 
-    void PopBack();
+  void PushBack(char chr);
 
-    void Resize(size_t new_sz);
+  void PopBack();
 
-    void Resize(size_t new_sz, char c);
+  void Resize(size_t new_sz);
 
-    void Reserve(size_t new_cap);
+  void Resize(size_t new_sz, char chr);
 
-    void ShrinkToFit();
-    
-    void Swap(String& s);
+  void Reserve(size_t new_cap);
 
-    char& operator[](size_t idx);
-    char const& operator[](size_t idx) const;
+  void ShrinkToFit();
 
-    char& Front();
-    char const& Front() const;
+  void Swap(String& str);
 
-    char& Back();
-    char const& Back() const;
+  char& operator[](size_t idx);
+  char const& operator[](size_t idx) const;
 
-    bool Empty() const;
+  char& Front();
+  char const& Front() const;
 
-    size_t Size() const;
+  char& Back();
+  char const& Back() const;
 
-    size_t Capacity() const;
+  bool Empty() const;
 
-    char* Data();
-    char const* Data() const;
+  size_t Size() const;
 
-    String& operator+=(String const& s);
+  size_t Capacity() const;
 
-    String& operator*=(size_t n); 
+  char* Data();
+  char const* Data() const;
 
-    std::vector<String> Split(const String& delim = " ") const;
-    
-    String Join(const std::vector<String>& strings) const;
+  String& operator+=(String const& str);
 
-    size_t Find(String const& s, size_t pos = 0) const;
+  String& operator*=(size_t num);
 
-    String String::Substr(size_t pos, size_t count = std::string::npos) const;
+  std::vector<String> Split(String const& delim = String(" ")) const;
+
+  String Join(std::vector<String> const& strings) const;
+
+  size_t Find(String const& str, size_t pos = 0) const;
+
+  String Substr(size_t pos, size_t count = String::kNpos) const;
+
+ private:
+  size_t sz_ = 0;
+  size_t cap_ = 0;
+  char* data_ = nullptr;
 };
 
-bool operator<(String const& s1, String const& s2);
-bool operator>(String const& s1, String const& s2);
-bool operator<=(String const& s1, String const& s2);
-bool operator>=(String const& s1, String const& s2);
-bool operator==(String const& s1, String const& s2);
-bool operator!=(String const& s1, String const& s2);
+bool operator<(String const& str1, String const& str2);
+bool operator>(String const& str1, String const& str2);
+bool operator<=(String const& str1, String const& str2);
+bool operator>=(String const& str1, String const& str2);
+bool operator==(String const& str1, String const& str2);
+bool operator!=(String const& str1, String const& str2);
 
-String operator+(String const& s1, String const& s2);
+String operator+(String const& str1, String const& str2);
 
-std::ostream& operator<<(std::ostream& out, String const& s);
-std::istream& operator>>(std::istream& in, String& s);
+std::ostream& operator<<(std::ostream& out, String const& str);
+std::istream& operator>>(std::istream& inp, String& str);
