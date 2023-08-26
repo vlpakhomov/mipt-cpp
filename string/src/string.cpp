@@ -1,6 +1,6 @@
 // Copyright 2023 Vladislav Pakhomov
 
-#include "string.hpp"
+#include "../include/string/string.hpp"
 
 #include <algorithm>
 #include <cstring>
@@ -133,12 +133,15 @@ bool operator>=(String const& str1, String const& str2) {
 bool operator==(String const& str1, String const& str2) {
   size_t sz1 = str1.Size();
   size_t sz2 = str2.Size();
-  for (size_t i1 = 0, i2 = 0; i1 < sz1 && i2 < sz2; ++i1, ++i2) {
-    if (str1[i1] != str2[i2]) {
+  if (sz1 != sz2) {
+    return false;
+  }
+  for (size_t i = 0; i < sz1; ++i) {
+    if (str1[i] != str2[i]) {
       return false;
     }
   }
-  return sz1 != sz2;
+  return true;
 }
 bool operator!=(String const& str1, String const& str2) {
   return !(str1 == str2);
@@ -149,8 +152,9 @@ String& String::operator+=(String const& str) {
   if (new_sz > cap_) {
     Reserve(new_sz * 2);
   }
+  // std::copy
   for (size_t i = sz_; i < new_sz; ++i) {
-    data_[i] = str[i];
+    data_[i] = str[i - sz_];
   }
   sz_ = new_sz;
   return *this;
@@ -171,6 +175,12 @@ String& String::operator*=(size_t num) {
   return *this;
 }
 
+String operator*(String const& str, size_t n) {
+  String copy = str;
+  copy *= n;
+  return copy;
+}
+
 std::ostream& operator<<(std::ostream& out, String const& str) {
   size_t size = str.Size();
   for (size_t i = 0; i < size; ++i) {
@@ -184,23 +194,18 @@ std::istream& operator>>(std::istream& inp, String& str) {
   if (snt) {
     str.Clear();
 
-    std::streamsize wth = inp.width();
-    if (wth == 0) {
-      wth = std::numeric_limits<std::streamsize>::max();
-    }
-    char chr;
-    while (inp.get(chr)) {
+    char chr = inp.get();
+    while (std::char_traits<char>::not_eof(chr)) {
       str.PushBack(chr);
-
-      --wth;
-      bool space = std::isspace(inp.peek(), inp.getloc());
-      if (wth == 0 || inp.peek() == EOF || space) {
+      
+      bool space = std::isspace(inp.peek());
+      if (!std::char_traits<char>::not_eof(inp.peek()) || space) {
         break;
       }
+      chr = inp.get();
     }
   }
 
-  inp.width(0);
   return inp;
 }
 
@@ -219,7 +224,15 @@ std::vector<String> String::Split(String const& delim) const {
     tmp.push_back(token);
   }
 
-  tmp.push_back((*this).Substr(pos_start));
+  if(tmp.size()) {
+    if (pos_start == sz_) {
+      tmp.push_back(String(""));
+    } else {
+       tmp.push_back((*this).Substr(pos_start));
+    }
+  } else {
+    tmp.push_back(*this);
+  }
   return tmp;
 }
 
@@ -245,18 +258,14 @@ String String::Join(std::vector<String> const& strings) const {
 
 size_t String::Find(String const& str, size_t pos) const {
   size_t str_sz = str.Size();
-  size_t start;
-  size_t match;
-  for (size_t i = pos; i < sz_ - 1; ++i) {
-    start = i;
-    match = 0;
-    for (; match < str_sz && (i + match) < sz_ - 1; ++match) {
-      if (data_[i + match] != str[match]) {
-        break;
-      }
+  size_t mtch;
+  for (size_t i = pos; i < sz_; ++i) {
+    mtch = 0;
+    while(mtch < str_sz && (i + mtch) < sz_&& data_[i + mtch] == str[mtch]) {
+      ++mtch;
     }
-    if (match == str_sz) {
-      return start;
+    if (mtch == str_sz) {
+      return i;
     }
   }
   return (str_sz != 0 ? String::kNpos : 0);
@@ -264,11 +273,11 @@ size_t String::Find(String const& str, size_t pos) const {
 
 String String::Substr(size_t pos, size_t count) const {
   if (count > sz_ - 1 - pos) {
-    return String(data_ + pos);
+    String str = String(sz_- 1 - pos + 1, '\0');
+    std::copy(data_ + pos, data_ + sz_, str.data_);
+    return str;
   }
-  char chr = data_[pos + count];
   data_[pos + count] = '\0';
   String copy(data_ + pos);
-  data_[pos + count] = chr;
   return copy;
 }

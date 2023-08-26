@@ -13,7 +13,7 @@ class String {
 
   String(size_t num, char chr);
 
-  explicit String(char const* str);
+  /*explicit*/ String(char const* str);
 
   String(String const& str);
   String& operator=(String const& str);
@@ -79,6 +79,8 @@ bool operator==(String const& str1, String const& str2);
 bool operator!=(String const& str1, String const& str2);
 
 String operator+(String const& str1, String const& str2);
+
+String operator*(String const& str, size_t n); 
 
 std::ostream& operator<<(std::ostream& out, String const& str);
 std::istream& operator>>(std::istream& inp, String& str);

@@ -1,0 +1,8 @@
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/string.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/test.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/edit_cache.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/rebuild_cache.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/list_install_components.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/install.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/install/local.dir
+/home/vladislavp/mipt_cpp/string/tests/build/CMakeFiles/install/strip.dir

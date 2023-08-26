@@ -10,7 +10,7 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 enable_testing()
-add_executable(${TASK_NAME} string.cpp tests.cpp)
+add_executable(${TASK_NAME} ../src/string.cpp tests.cpp)
 
 add_test(${TASK_NAME} ${Testing_SOURCE_DIR}/bin/testing)
 
