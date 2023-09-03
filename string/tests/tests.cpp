@@ -235,8 +235,8 @@ TEST(Comparison, SameLen) {
 }
 
 TEST(Comparison, Const) {
-  const String s = ("aboba");
-  const String t = ("abiba");
+  const String s = String("aboba");
+  const String t = String("abiba");
   EXPECT_TRUE(t < s);
   EXPECT_FALSE(t > s);
   EXPECT_FALSE(t >= s);
@@ -246,8 +246,8 @@ TEST(Comparison, Const) {
 }
 
 TEST(Comparison, DiffLen) {
-  String s = ("abobabiba");
-  String t = ("aboba");
+  String s = String("abobabiba");
+  String t = String("aboba");
   EXPECT_TRUE(t < s);
   EXPECT_FALSE(t > s);
   EXPECT_FALSE(t >= s);
@@ -257,8 +257,8 @@ TEST(Comparison, DiffLen) {
 }
 
 TEST(Comparison, Empty) {
-  String s = ("aboba");
-  String t = ("");
+  String s = String("aboba");
+  String t = String("");
   EXPECT_TRUE(t < s);
   EXPECT_FALSE(t > s);
   EXPECT_FALSE(t >= s);
@@ -291,13 +291,13 @@ TEST(Iostream, ConstOut) {
 TEST(Concat, EasyPlus) {
   String s = String("aboba");
   String t = String("biba");
-  EXPECT_TRUE(s + t == "abobabiba");
+  EXPECT_TRUE(s + t == String("abobabiba"));
 }
 
 TEST(Concat, ConstPlus) {
   const String s = String("aboba");
   const String t = String("biba");
-  EXPECT_TRUE(s + t == "abobabiba");
+  EXPECT_TRUE(s + t == String("abobabiba"));
 }
 
 TEST(Concat, StressPlus) {
@@ -308,21 +308,21 @@ TEST(Concat, StressPlus) {
   String s;
   const size_t num_iterations = 1 << 10;
   for (size_t i = 0; i < num_iterations; ++i) {
-    String to_add = "a";
+    String to_add = String("a");
     to_add[0] += distrib(gen);
     expected.append(to_add.Data(), to_add.Size());
     s = s + to_add;
   }
-  EXPECT_TRUE(s == expected.data());
+  EXPECT_TRUE(s == String(expected.data()));
 }
 
 TEST(Concat, PlusAssignmentCombo) {
   String s = String("(");
   String t = String(")");
   s += t + s += s + t += t;
-  EXPECT_TRUE((s += t) == "()(()))");
-  (s += t) = "f";
-  EXPECT_TRUE(s == "f");
+  EXPECT_TRUE((s += t) == String("()(()))"));
+  (s += t) = String("f");
+  EXPECT_TRUE(s == String("f"));
 }
 
 TEST(Concat, PlusAssignmentFibonacciStyle) {
@@ -337,18 +337,18 @@ TEST(Concat, PlusAssignmentFibonacciStyle) {
     s_s += t_s;
     t_s += s_s;
   }
-  EXPECT_TRUE(t == t_s.data());
-  EXPECT_TRUE(s == s_s.data());
+  EXPECT_TRUE(t == String(t_s.data()));
+  EXPECT_TRUE(s == String(s_s.data()));
 }
 
 TEST(Multiply, Easy) {
   String s = String("aba");
-  EXPECT_TRUE(s * 2 == "abaaba");
+  EXPECT_TRUE(s * 2 == String("abaaba"));
 }
 
 TEST(Multiply, Const) {
   const String s = String("aba");
-  EXPECT_TRUE(s * 2 == "abaaba");
+  EXPECT_TRUE(s * 2 == String("abaaba"));
 }
 
 TEST(Multiply, Stress) {
@@ -370,48 +370,48 @@ TEST(Multiply, ComboWithPlus) {
 
 TEST(Split, Easy) {
   {
-    std::vector<String> expected{"aba", "caba", "1"};
+    std::vector<String> expected{String("aba"), String("caba"), String("1")};
     EXPECT_TRUE(expected == String("aba caba 1").Split());
   }
   {
-    std::vector<String> expected{"aba"};
+    std::vector<String> expected{String("aba")};
     EXPECT_TRUE(expected == String("aba").Split());
   }
 }
 
 TEST(Split, Empty) {
-  std::vector<String> expected{""};
+  std::vector<String> expected{String("")};
   EXPECT_TRUE(expected == String("").Split());
 }
 
 TEST(Split, FullMatch) {
-  std::vector<String> expected{"", ""};
-  EXPECT_TRUE(expected == String("full match").Split("full match"));
+  std::vector<String> expected{String(""), String("")};
+  EXPECT_TRUE(expected == String("full match").Split(String("full match")));
 }
 
 TEST(Split, SomeTests) {
   {
-    std::vector<String> expected{"just", "", "a", "test", ""};
+    std::vector<String> expected{String("just"), String(""), String("a"), String("test"), String("")};
     EXPECT_TRUE(expected == String("just  a test ").Split());
   }
   {
-    std::vector<String> expected{"hello", "world,no split here", "", "1", ""};
-    EXPECT_TRUE(expected == String("hello, world,no split here, , 1, ").Split(", "));
+    std::vector<String> expected{String("hello"), String("world,no split here"), String(""), String("1"), String("")};
+    EXPECT_TRUE(expected == String("hello, world,no split here, , 1, ").Split(String(", ")));
   }
   {
-    std::vector<String> expected{"", "a", "b c", "def", "g h "};
-    EXPECT_TRUE(expected == String("  a  b c  def  g h ").Split("  "));
+    std::vector<String> expected{String(""), String("a"), String("b c"), String("def"), String("g h ")};
+    EXPECT_TRUE(expected == String("  a  b c  def  g h ").Split(String("  ")));
   }
 }
 
 TEST(Join, Easy) {
-  EXPECT_TRUE(String("aba") == String("b").Join({"a", "a"}));
+  EXPECT_TRUE(String("aba") == String("b").Join({String("a"), String("a")}));
 }
 
 TEST(Join, Empty) {
   EXPECT_TRUE(String("") == String("b").Join({}));
-  EXPECT_TRUE(String("") == String("").Join({""}));
-  EXPECT_TRUE(String(" ") == String("").Join({" "}));
+  EXPECT_TRUE(String("") == String("").Join({String("")}));
+  EXPECT_TRUE(String(" ") == String("").Join({String(" ")}));
 }
 
 TEST(Join, Stress) {

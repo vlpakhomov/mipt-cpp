@@ -18,7 +18,10 @@ Probably, I will add other useful and more complex features to this implementati
 
 - Implementation encapsulation principle using class methods.
 - Implementation information hiding principle using access specifiers.
-- Use clang-tidy linter for static code analysis.
+- Following the C++ style (not use C functions such as memset, use std toolkit). 
+- Use clang-tidy linter for general static code analysis.
+- Use clang-format for reformat code following the Google C++ Code Style.
+- Use cpplint linter for static code analysis of conforms to Google C++ Code Style. 
 
 <p align="right"><a href="#string">Back to top ⬆️</a></p>
 
@@ -130,8 +133,8 @@ Probably, I will add other useful and more complex features to this implementati
 ## 📌 To do 
 
 - Task ✅
-- Tests 🔄
-- Code style 💤
+- Tests ✅
+- Code style ✅
 - .....
 
 **Note: ✅ - done, 🔄 - in progress, 💤 - waiting for** 

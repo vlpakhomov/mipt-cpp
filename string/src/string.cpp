@@ -59,9 +59,7 @@ void String::Resize(size_t new_sz, char chr) {
   size_t prev_sz = sz_;
   Resize(new_sz);
   if (new_sz > prev_sz) {
-    for (size_t i = prev_sz; i < new_sz; ++i) {
-      data_[i] = chr;
-    }
+    std::fill(data_ + prev_sz, data_ + new_sz, chr);
   }
 }
 
@@ -152,10 +150,7 @@ String& String::operator+=(String const& str) {
   if (new_sz > cap_) {
     Reserve(new_sz * 2);
   }
-  // std::copy
-  for (size_t i = sz_; i < new_sz; ++i) {
-    data_[i] = str[i - sz_];
-  }
+  std::copy(str.data_, str.data_ + new_sz - sz_, data_ + sz_);
   sz_ = new_sz;
   return *this;
 }
@@ -197,7 +192,7 @@ std::istream& operator>>(std::istream& inp, String& str) {
     char chr = inp.get();
     while (std::char_traits<char>::not_eof(chr)) {
       str.PushBack(chr);
-      
+
       bool space = std::isspace(inp.peek());
       if (!std::char_traits<char>::not_eof(inp.peek()) || space) {
         break;
@@ -224,7 +219,7 @@ std::vector<String> String::Split(String const& delim) const {
     tmp.push_back(token);
   }
 
-  if(tmp.size()) {
+  if (tmp.size()) {
     if (pos_start == sz_) {
       tmp.push_back(String(""));
     } else {
@@ -261,7 +256,7 @@ size_t String::Find(String const& str, size_t pos) const {
   size_t mtch;
   for (size_t i = pos; i < sz_; ++i) {
     mtch = 0;
-    while(mtch < str_sz && (i + mtch) < sz_&& data_[i + mtch] == str[mtch]) {
+    while (mtch < str_sz && (i + mtch) < sz_&& data_[i + mtch] == str[mtch]) {
       ++mtch;
     }
     if (mtch == str_sz) {
