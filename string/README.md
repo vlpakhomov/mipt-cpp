@@ -1,4 +1,4 @@
-## string
+# string
 
 <br/>
 
@@ -22,6 +22,9 @@ Probably, I will add other useful and more complex features to this implementati
 - Use clang-tidy linter for general static code analysis.
 - Use clang-format for reformat code following the Google C++ Code Style.
 - Use cpplint linter for static code analysis of conforms to Google C++ Code Style. 
+- Implementation the rule of three.
+- Everything is covered by unit tests.
+- Use basic rules and idioms for operator overloading.   
 
 <p align="right"><a href="#string">Back to top ⬆️</a></p>
 
@@ -83,7 +86,7 @@ Probably, I will add other useful and more complex features to this implementati
     3. Деструктор ✅
 * Метод `Clear()` - устанавливает размер в 0, деаллокации выделенной памяти при этом НЕ происходит ✅
 * Метод `PushBack(character)` - добавляет букву `character` в конец строки ✅
-* Метод `PopBack()` - удаляет последнюю букву. В случае пустой строки должен ✅
+* Метод `PopBack()` - удаляет последнюю букву. В случае пустой строки должен 
   ничего не делать, хотя для `std::string` это будет UB ✅
 * Метод `Resize(new_size)` - изменяет размер на `new_size`. Если вместимость 
   не позволяет хранить столько символов, то выделяется новый буфер с вместимостью `new_size`. ✅
@@ -102,9 +105,9 @@ Probably, I will add other useful and more complex features to this implementati
 * Метод `Data()` - возвращает указатель на начало массива. ✅
 * Операторы сравнения (`<`, `>`, `<=`, `>=`, `==`, `!=`), задающие лексикографический порядок. ✅
 * Операторы + и += для конкатенации строк. Например, `"ab" + "oba" = "aboba"`. Операция `s += t` должна работать за `O(|t|)`!!! Иначе не дождетесь итогов тестирования и спалите тестирующие сервера ✅
-* Оператор умножения на число. Принимает строку `str` и число `n` (именно в таком порядке) и вернет строку вида `str +  ... + str` (`n` раз).
+* Оператор умножения на число. Принимает строку `str` и число `n` (именно в таком порядке) и вернет строку вида `str +  ... + str` (`n` раз). ✅
   Сложность по времени должна быть O(длины результата). Умножение числа на строку должно приводить ошибку компиляции!
-  Загадка о лектора по алгоритмам - не возникло ли у вас аналогии с каким-то известным вам алгоритмом?) ✅
+  Загадка о лектора по алгоритмам - не возникло ли у вас аналогии с каким-то известным вам алгоритмом?) 
 
 * Операторы ввода из потока и вывода в поток. ✅
 * Метод `std::vector<String> Split(const String& delim = " ")` - аналог сплита в питоне. ✅
@@ -132,10 +135,11 @@ Probably, I will add other useful and more complex features to this implementati
 <a id="to_do"></a>
 ## 📌 To do 
 
+- README ✅
 - Task ✅
 - Tests ✅
-- Code style ✅
-- .....
+- Code style and formatting ✅
+- Backward compatibility with C strings 💤 
 
 **Note: ✅ - done, 🔄 - in progress, 💤 - waiting for** 
 
@@ -147,7 +151,7 @@ Probably, I will add other useful and more complex features to this implementati
 
 Vladislav Pakhomov - [@VlPakhomov](https://t.me/VlPakhomov) - [vladislavpakhomov03@gmail.com](mailto:vladislavpakhomov03@gmail.com)
 
-Project Link: https://github.com/VlPakhomov/mipt_cpp/string
+Project Link: https://github.com/VlPakhomov/mipt-cpp/string
 
 <p align="right"><a href="#string">Back to top ⬆️</a></p>
 

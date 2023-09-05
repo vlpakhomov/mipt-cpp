@@ -1,7 +1,6 @@
 // Copyright 2023 Vladislav Pakhomov
 
 #include "../include/string/string.hpp"
-
 #include <algorithm>
 #include <cstring>
 #include <iostream>

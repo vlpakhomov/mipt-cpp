@@ -1,6 +1,7 @@
 #pragma once
 // Copyright 2023 Vladislav Pakhomov
 
+#include <ostream>
 #include <istream>
 #include <limits>
 #include <vector>
