@@ -1,0 +1,8 @@
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/big-integer.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/test.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/edit_cache.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/rebuild_cache.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/list_install_components.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/install.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/install/local.dir
+/home/vladislavp/mipt-cpp/big-integer/tests/build/CMakeFiles/install/strip.dir

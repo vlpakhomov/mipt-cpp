@@ -8,68 +8,77 @@
 #include <string>
 #include <vector>
 
-class BigInteger {
+class BigInt {
   public:
     static int const kBase = 10;
-    static int const digit_size = log10(kBase - 1) + 1;
+    // log10(kBase - 1) + 1
+    static int const kDigitSize = 1;
 
-    BigInteger() = default;
-    BigInteger(BigInteger const& big) = default;
-    ~BigInteger() = default;
+    BigInt() = default;
+    BigInt(BigInt const& bi) = default;
+    ~BigInt() = default;
     
-    void Swap(BigInteger& big);
-    BigInteger& operator=(BigInteger const& big);
+    void Swap(BigInt& bi);
+    BigInt& operator=(BigInt const& bi);
 
-    explicit BigInteger(std::string const& str);
-    BigInteger(std::int64_t num);
+    explicit BigInt(std::string const& str);
+    BigInt(std::int64_t num);
 
-    BigInteger& operator+=(BigInteger const& big); 
-    BigInteger& operator-=(BigInteger const& big);
-    BigInteger& operator*=(BigInteger const& big);
-    BigInteger& operator/=(BigInteger const& big);
-    BigInteger& operator%=(BigInteger const& big);
+    BigInt& operator+=(BigInt const& bi); 
+    BigInt& operator-=(BigInt const& bi);
+    BigInt& operator*=(BigInt const& bi);
+    BigInt& operator/=(BigInt const& bi);
+    BigInt& operator%=(BigInt const& bi);
   
-    BigInteger& operator++();
-    BigInteger operator++(int);
-    BigInteger& operator--();
-    BigInteger operator--(int);
+    BigInt& operator++();
+    BigInt operator++(int);
+    BigInt& operator--();
+    BigInt operator--(int);
 
-    BigInteger operator-() const;
+    BigInt operator-() const;
    
     explicit operator bool() const;
 
     std::string ToString() const;
-    
+   
+    int GetDigit(int k) const;
+
     int NumDigits() const; 
     
     bool IsNeg() const;
+    static std::string Dtos(int digit);
+
+    //static constexpr int DigitSize();
   private:
     std::vector<int> digits_ = {0};
     bool is_neg_ = false;
 
     void Normalize();
 
-    static std::string Dtos(int digit);
+    //static std::string Dtos(int digit);
 
-    static int Stod(std::string const& digit);
+    static int Stod(std::string const& str);
     
-    int GetDigit(int k) const;
+    static bool UComp(BigInt const& bi1, BigInt const& bi2);
 
-    static bool UComp(BigInteger const& big1, BigInteger const& big2);
+    static int Quotient(BigInt const& numtr, BigInt const& denumtr); 
 };
 
-BigInteger operator+(BigInteger const& big1, BigInteger const& big2);
-BigInteger operator-(BigInteger const& big1, BigInteger const& big2);
-BigInteger operator*(BigInteger const& big1, BigInteger const& big2);
-BigInteger operator/(BigInteger const& big1, BigInteger const& big2);
-BigInteger operator%(BigInteger const& big1, BigInteger const& big2);
+//int const BigInt::kDigitSize = BigInt::DigitSize();
 
-bool operator<(BigInteger const& big1, BigInteger const& big2);
-bool operator>(BigInteger const& big1, BigInteger const& big2);
-bool operator<=(BigInteger const& big1, BigInteger const& big2);
-bool operator>=(BigInteger const& big1, BigInteger const& big2);
-bool operator==(BigInteger const& big1, BigInteger const& big2);
-bool operator!=(BigInteger const& big1, BigInteger const& big2);
 
-std::ostream& operator<<(std::ostream& out, BigInteger const& big);
-std::istream& operator>>(std::istream& inp, BigInteger& big);
+BigInt operator+(BigInt const& bi1, BigInt const& bi2);
+BigInt operator-(BigInt const& bi1, BigInt const& bi2);
+BigInt operator*(BigInt const& bi1, BigInt const& bi2);
+BigInt operator/(BigInt const& bi1, BigInt const& bi2);
+BigInt operator%(BigInt const& bi1, BigInt const& bi2);
+
+bool operator<(BigInt const& bi1, BigInt const& bi2);
+bool operator>(BigInt const& bi1, BigInt const& bi2);
+bool operator<=(BigInt const& bi1, BigInt const& bi2);
+bool operator>=(BigInt const& bi1, BigInt const& bi2);
+bool operator==(BigInt const& bi1, BigInt const& bi2);
+bool operator!=(BigInt const& bi1, BigInt const& bi2);
+
+std::ostream& operator<<(std::ostream& out, BigInt const& bi);
+std::istream& operator>>(std::istream& inp, BigInt& bi);
