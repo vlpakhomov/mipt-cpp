@@ -46,20 +46,17 @@ class BigInt {
     int NumDigits() const; 
     
     bool IsNeg() const;
-    static std::string Dtos(int digit);
-
-    //static constexpr int DigitSize();
+    
+    static bool UComp(BigInt const& bi1, BigInt const& bi2);
   private:
     std::vector<int> digits_ = {0};
     bool is_neg_ = false;
 
     void Normalize();
 
-    //static std::string Dtos(int digit);
+    static std::string Dtos(int digit);
 
     static int Stod(std::string const& str);
-    
-    static bool UComp(BigInt const& bi1, BigInt const& bi2);
 
     static int Quotient(BigInt const& numtr, BigInt const& denumtr); 
 };

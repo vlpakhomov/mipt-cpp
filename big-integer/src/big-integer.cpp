@@ -20,79 +20,87 @@ BigInt::BigInt(std::string const& str): is_neg_(str[0] == '-' &&
   int pos = static_cast<int>(str[0] == '-' || str[0] == '+');
   int dig_sz = BigInt::kDigitSize;
   int sz = str.size();
-  digits_.resize((sz - pos) / dig_sz);
+  
+  int digits_sz = (sz - pos)/dig_sz;
+  digits_.resize(digits_sz);
 
-  for (int i = 0; pos < sz; pos += dig_sz, ++i) {
-    digits_[i] = Stod(str.substr(pos, dig_sz));
+  for (int i = 0, j = digits_sz - 1; pos < sz; pos += dig_sz, ++i, --j) {
+    digits_[j] = Stod(str.substr(pos, dig_sz));
   }
 
   Normalize();
 }
 
-BigInt::BigInt(std::int64_t num): is_neg_(num < 0) {
-  if (num != 0) { digits_.pop_back(); }
+BigInt::BigInt(std::int64_t num): BigInt(std::to_string(num)) {}
+/*  if (num != 0) { digits_.pop_back(); }
   num = std::abs(num);
   while (num > 0) {
     digits_.push_back(num % BigInt::kBase);
     num /= BigInt::kBase;
   }
-}
+}*/
 
 BigInt& BigInt::operator+=(BigInt const& bi) {
-  int base = BigInt::kBase;
+  int sz2 = bi.NumDigits();
+  int sz = std::max(NumDigits(), sz2);
+  digits_.resize(sz);
+  int carry = 0;
   if (is_neg_ == bi.is_neg_) {
-    int sz = std::max(NumDigits(), bi.NumDigits());
-    digits_.resize(sz);
-    int carry = 0;
     for (int i = 0; i < sz; ++i) {
-      digits_[i] = (digits_[i] * 1LL + bi.digits_[i] + carry) % base;
-      carry = (digits_[i] + bi.digits_[i] + carry) / base;
+      long long cur = (digits_[i] * 1LL + (i < sz2 ? bi.digits_[i] : 0) + carry);
+      digits_[i] = cur % BigInt::kBase;
+      carry = cur / BigInt::kBase;
     }
     if (carry == 1) { digits_.push_back(1); }
   } else {
       BigInt copy = bi;
       if (BigInt::UComp(*this, copy)) { 
+        is_neg_ = bi.IsNeg(); 
         Swap(copy);
-        is_neg_ = bi.IsNeg();
       }
-      int sz = std::max(NumDigits(), copy.NumDigits());  
-      digits_.reserve(sz);
-      int borrow = 0;
       for (int i = 0; i < sz; ++i) {
-        digits_[i] -= (copy.digits_[i] + borrow);
-        if (digits_[i] < 0) {
-          digits_[i] += base;
-        } 
-        borrow = digits_[i] < 0 ? -1 : 0;
+        long long cur = (digits_[i] - (i < sz2 ? copy.digits_[i] : 0)) + carry;
+        digits_[i] = cur;
+        if (cur < 0) {
+          digits_[i] += BigInt::kBase;
+        }
+        carry = cur < 0 ? -1 : 0;
       }
-      Normalize();
   }
+  Normalize();
+  if (digits_[0] == 0) { is_neg_ = false; }
   return (*this);
 }
 BigInt& BigInt::operator-=(BigInt const& bi) {
   is_neg_ = !is_neg_;
   *this += bi;
-  is_neg_ = !is_neg_;
+  if (digits_[0] != 0) { is_neg_ = !is_neg_; }
   return *this; 
 }
 BigInt& BigInt::operator*=(BigInt const& bi) {
-  is_neg_ = !(is_neg_ != bi.IsNeg());
-
+  is_neg_ = (IsNeg() != bi.IsNeg());
   BigInt copy = (*this);
       
-  int sz1 = bi.NumDigits();
-  int sz2 = NumDigits();
-  digits_.resize(sz1 + sz2);
+  int sz1 = NumDigits();
+  int sz2 = bi.NumDigits();
+  for (int i = 0; i < sz1; ++i) { digits_[i] = 0; }
+
+  digits_.resize(sz1 + sz2 + 1);
 
   for (int i = 0; i < sz1; ++i) {
-    for (int j = 0, carry = 0; j < sz2 || carry == 1; ++i) {
+    for (int j = 0, carry = 0; j < sz2 || carry != 0; ++j) {
       long long cur = GetDigit(i+j) + 
         copy.GetDigit(i) * 1LL *  (j < sz2 ? bi.GetDigit(j) : 0) + carry;
+      //std::cout << (j < sz2 ? bi.GetDigit(j) : 0) <<' '  << carry <<'\n';
+      //std::cout << GetDigit(i+j) << ' ' << copy.GetDigit(i) << ' ' << cur << '\n';
       digits_[i+j] = cur % BigInt::kBase;
       carry = cur / BigInt::kBase;
     }
   }
+  
   Normalize();
+
+  if (digits_[0] == 0) { is_neg_ = false; }
   return (*this);
 }
 BigInt& BigInt::operator/=(BigInt const& bi) {
@@ -154,10 +162,10 @@ BigInt::operator bool() const {
 }
 
 std::string BigInt::ToString() const {
-  std::string str;
+  std::string str = (is_neg_ ? "-" : "");
 
   int sz = digits_.size();
-  str.reserve(sz * BigInt::kDigitSize);
+  str.reserve(sz * BigInt::kDigitSize + static_cast<int>(is_neg_));
 
   for (int i = sz - 1; i > -1; --i) {
     str += Dtos(digits_[i]);
@@ -263,22 +271,14 @@ BigInt operator%(BigInt const& bi1, BigInt const& bi2) {
 
 
 bool operator<(BigInt const& bi1, BigInt const& bi2) { 
-  int sz1 = bi1.NumDigits();
-  int sz2 = bi2.NumDigits();
+  bool flag = BigInt::UComp(bi1, bi2);
+  bool bi1_neg = bi1.IsNeg();
+  bool bi2_neg = bi2.IsNeg();
+
+  if (bi1_neg && !bi2_neg) { return true; }
+  if (!bi1_neg && bi2_neg) { return false; }
   
-  if (sz1 < sz2 || bi1.IsNeg() && 
-      !bi2.IsNeg()) { return true; }
-
-  if (sz1 > sz2 || !bi1.IsNeg() &&
-      bi2.IsNeg()) { return false; }
-
-  bool pos_flag = (!bi1.IsNeg());
-  for (int i = sz1 - 1; i > 0; --i) {
-    if (bi1.GetDigit(i) < bi2.GetDigit(i)) { return pos_flag; }
-    if (bi1.GetDigit(i) > bi2.GetDigit(i)) { return !pos_flag; }
-  }
-
-  return false;
+  return (!bi1_neg ? flag : !flag);
 }
 bool operator>(BigInt const& bi1, BigInt const& bi2) {
   return bi2 < bi1;
