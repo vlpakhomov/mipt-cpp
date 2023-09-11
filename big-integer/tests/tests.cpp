@@ -274,7 +274,7 @@ TEST(MUL, BIG_NUMS) {
         EXPECT_EQ(a * b, c);
     }
 }
-/*
+
 template <typename T, typename U>
 void TestDiv(T num1, U num2) {
     BigInt a(num1);
@@ -328,7 +328,7 @@ TEST(MOD, BIG) {
     BigInt c("7378391778761293146339181012435030227");
     EXPECT_EQ(a % b, c);
 }
-*/
+
 TEST(IO, BASIC) {
     std::istringstream iss("1234567890123456789012345 -1234567890123456789012");
     std::ostringstream oss;

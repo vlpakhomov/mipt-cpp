@@ -80,6 +80,9 @@ Probably, I will add other useful and more complex features to this implementati
 - Task 🔄 
 - Tests 💤 
 - Code style and formatting 💤 
+- Small object optimisation 💤
+- Copy on write optimisation 💤
+
 
 **Note: ✅ - done, 🔄 - in progress, 💤 - waiting for** 
 

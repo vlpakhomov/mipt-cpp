@@ -54,7 +54,7 @@ BigInt& BigInt::operator+=(BigInt const& bi) {
     if (carry == 1) { digits_.push_back(1); }
   } else {
       BigInt copy = bi;
-      if (BigInt::UComp(*this, copy)) { 
+      if (BigInt::UCompLess(*this, copy)) { 
         is_neg_ = bi.IsNeg(); 
         Swap(copy);
       }
@@ -104,32 +104,23 @@ BigInt& BigInt::operator*=(BigInt const& bi) {
   return (*this);
 }
 BigInt& BigInt::operator/=(BigInt const& bi) {
-  if ((*this) < bi) { 
-    (*this) = 0;
-  } else {
-      is_neg_ = !(is_neg_ != bi.IsNeg());
-
-      int sz1 = NumDigits();
-      int sz2 = bi.NumDigits();  
+  if (UCompLess(*this, bi)) { (*this) = 0;} 
+  else {
+      bool sign = is_neg_;
       BigInt numerator;
-      numerator.digits_.reserve(sz2);
-
-      int idx = 0;
-      do {
-        bool flag = false;
-        std::copy(digits_.rbegin() + idx, 
-            digits_.rbegin() + idx + sz2, numerator.digits_.begin());
-        if (numerator < bi && idx + sz2 < sz1) { 
-          int num = digits_[sz1 - idx - sz2];
-          numerator.digits_.insert(numerator.digits_.begin(), num);
-          flag = true;
-        }
+      BigInt res;
+      res.digits_.resize(NumDigits());
+      for (int i = NumDigits() - 1; i >= 0; --i) {
+        numerator *= BigInt::kBase;
+        numerator.digits_[0] = digits_[i];
         int q = BigInt::Quotient(numerator, bi);
-        //if (flag) { numerator.digits_.begin(); }
-        idx += sz2;
-      } while(idx + sz2 < sz1);
+        res.digits_[i] = q;
+        numerator -= bi * q;
+      }
+      (*this) = res;
+      is_neg_ = (sign != bi.IsNeg());
   }
-
+  Normalize();
   return (*this);
 }
 BigInt& BigInt::operator%=(BigInt const& bi) {
@@ -214,7 +205,7 @@ int BigInt::Stod(std::string const& str) {
   return std::stoi(str);
 }
 
-bool BigInt::UComp(BigInt const& bi1, BigInt const& bi2) {
+bool BigInt::UCompLess(BigInt const& bi1, BigInt const& bi2) {
   int sz1 = bi1.NumDigits();
   int sz2 = bi2.NumDigits();
 
@@ -222,25 +213,59 @@ bool BigInt::UComp(BigInt const& bi1, BigInt const& bi2) {
   
   if (sz1 > sz2) { return false; }
 
-  for (int i = 0; i < sz1; ++i) {
+  for (int i = sz1 - 1; i > -1; --i) {
     if (bi1.GetDigit(i) < bi2.GetDigit(i)) { return true; }
     if (bi1.GetDigit(i) > bi2.GetDigit(i)) { return false; }
   }
 
   return false;
 }
+bool BigInt::UCompLessEqual(BigInt const& bi1, BigInt const& bi2) {
+  int sz1 = bi1.NumDigits();
+  int sz2 = bi2.NumDigits();
+
+  if (sz1 < sz2) { return true; }
+  
+  if (sz1 > sz2) { return false; }
+
+  for (int i = sz1 - 1; i > -1; --i) {
+    if (bi1.GetDigit(i) < bi2.GetDigit(i)) { return true; }
+    if (bi1.GetDigit(i) > bi2.GetDigit(i)) { return false; }
+  }
+
+  return true;
+}
 
 int BigInt::Quotient(BigInt const& numtr, 
     BigInt const& denumtr) {
+  //std::cout << "numtr: " << numtr << " denumtr: " << denumtr << '\n';
   int l = 0;
-  int r = INT_MAX; 
+  int r = BigInt::kBase; 
   while(r - l > 1) {
     int m = (r + l) / 2;
-    if (m * denumtr <= numtr) { l = m; }
+    BigInt cur = denumtr * m;
+    if (UCompLessEqual(cur, numtr)) { l = m; }
     else { r = m; }
   }
 
+  //std::cout << "l: " << l << "r: " << r << '\n';
+  //std::cout << "l * q: " << l * denumtr << "r * q: " << r * denumtr << '\n';
+
   return l;
+}
+
+BigInt& BigInt::LeftSubtraction(BigInt const& subthnd) {
+  int sz1 = NumDigits();
+  int sz2 = subthnd.NumDigits();
+  for (int i = sz1 - sz2, carry = 0; i < sz1; ++i) {
+    long long cur = digits_[i] - subthnd.digits_[i - sz1 + sz2] + carry;
+    digits_[i] = cur;
+    //std::cout << cur << '\n'; 
+    if (cur < 0) { digits_[i] += BigInt::kBase; }
+    carry = cur < 0 ? -1 : 0;
+  }
+  Normalize();
+  return (*this);
 }
 
 BigInt operator+(BigInt const& bi1, BigInt const& bi2) {
@@ -271,7 +296,7 @@ BigInt operator%(BigInt const& bi1, BigInt const& bi2) {
 
 
 bool operator<(BigInt const& bi1, BigInt const& bi2) { 
-  bool flag = BigInt::UComp(bi1, bi2);
+  bool flag = BigInt::UCompLess(bi1, bi2);
   bool bi1_neg = bi1.IsNeg();
   bool bi2_neg = bi2.IsNeg();
 

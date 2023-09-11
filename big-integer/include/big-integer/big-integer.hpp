@@ -47,7 +47,11 @@ class BigInt {
     
     bool IsNeg() const;
     
-    static bool UComp(BigInt const& bi1, BigInt const& bi2);
+    static bool UCompLess(BigInt const& bi1, BigInt const& bi2);
+    static bool UCompLessEqual(BigInt const& bi1, BigInt const& bi2);
+
+    static int Quotient(BigInt const& numtr, BigInt const& denumtr); 
+
   private:
     std::vector<int> digits_ = {0};
     bool is_neg_ = false;
@@ -57,8 +61,11 @@ class BigInt {
     static std::string Dtos(int digit);
 
     static int Stod(std::string const& str);
+public:
 
-    static int Quotient(BigInt const& numtr, BigInt const& denumtr); 
+    BigInt& LeftSubtraction(BigInt const& subthnd);
+
+    //static int Quotient(BigInt const& numtr, BigInt const& denumtr); 
 };
 
 //int const BigInt::kDigitSize = BigInt::DigitSize();
