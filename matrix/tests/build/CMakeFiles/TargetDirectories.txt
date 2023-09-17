@@ -1,0 +1,8 @@
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/matrix.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/test.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/edit_cache.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/rebuild_cache.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/list_install_components.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/install.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/install/local.dir
+/home/vladislavp/mipt-cpp/matrix/tests/build/CMakeFiles/install/strip.dir
