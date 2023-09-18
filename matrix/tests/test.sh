@@ -11,7 +11,7 @@ then
   exit 1
 fi
 
-python3 banned_words_checker.py --solution=../src/$1.tpp--bannded-words=banned_words.json
+python3 banned_words_checker.py --solution=../src/$1.ipp--bannded-words=banned_words.json
 if [[ ! $? -eq 0 ]]
 then
   echo "В вашем коде есть забаненые слова!"
@@ -39,7 +39,7 @@ echo "Banned words check achieved"
 
 #echo "clang-format check"
 #clang-format -i -style='{BasedOnStyle: Google, DerivePointerAlignment: false, PointerAlignment: Left, AlignOperands: true}' ../include/$1/$1.hpp &&
-#clang-format -i -style='{BasedOnStyle: Google, DerivePointerAlignment: false, PointerAlignment: Left, AlignOperands: true}' ../src/$1.tpp&&
+#clang-format -i -style='{BasedOnStyle: Google, DerivePointerAlignment: false, PointerAlignment: Left, AlignOperands: true}' ../src/$1.ipp&&
 #git diff --ignore-submodules --color > diff &&
 #cat diff
 #if [[ -s diff ]]

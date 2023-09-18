@@ -72,4 +72,4 @@ Matrix<N, K, T> operator*(Matrix<N, M, T> const& mat1,
 template <std::size_t N, std::size_t M, typename T>
 bool operator==(Matrix<N, M, T> const& mat1, Matrix<N, M, T> const& mat2);
 
-#include "../../src/matrix.tpp"
+#include "../../src/matrix.ipp"
