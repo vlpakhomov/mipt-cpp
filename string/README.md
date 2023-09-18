@@ -18,7 +18,9 @@ Probably, I will add other useful and more complex features to this implementati
 
 - Implementation encapsulation principle using class methods.
 - Implementation information hiding principle using access specifiers.
-- Following the C++ style (not use C functions such as memset, use std toolkit). 
+- Idiomatic implementation class constructors (copy-and-swap idiom, member initializer list, only non-trivial actions in bogy).
+- Well-designed class, id est there are no friend, mutable and etc bad keyword.
+- Following the idiomatic C++ style (not use C functions such as memset, use std toolkit). 
 - Use clang-tidy linter for general static code analysis.
 - Use clang-format for reformat code following the Google C++ Code Style.
 - Use cpplint linter for static code analysis of conforms to Google C++ Code Style. 
