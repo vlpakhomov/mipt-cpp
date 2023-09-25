@@ -52,26 +52,45 @@ echo "Banned words check achieved"
 
 echo "Начинаем билдить"
 
-echo "Build with clang"
+echo "Build with clang and sanitizers"
 mkdir build
 cd build
-cmake -DCMAKE_CXX_COMPILER=clang++ ..
+cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=san ..
 if [[ ! $? -eq 0 ]]
 then
-  echo "Сборка cmake с clang не сработала"
+  echo "Сборка cmake с clang++ and sanitizers не сработала"
   exit 1
 fi
 make
 if [[ ! $? -eq 0 ]]
 then
-  echo "Make с clang не сработал"
+  echo "Make с clang++ and sanitizers не сработал"
   exit 1
 fi
 cd ..
-echo "Build with clang achieved"
+echo "Build with clang++ and sanitizers achieved"
 
 
-echo "Build with g++"
+echo "Build with g++ and sanitizers"
+rm -r build
+mkdir build
+cd build
+cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=san ..
+if [[ ! $? -eq 0 ]]
+then
+  echo "Сборка cmake с g++ and sanitizers не сработала"
+  exit 1
+fi
+make
+if [[ ! $? -eq 0 ]]
+then
+  echo "Make с g++ and sanitizers не сработал"
+  exit 1
+fi
+cd .. 
+echo "Build with g++ and sanitizers achieved"
+
+echo "Just build with g++"
 rm -r build
 mkdir build
 cd build

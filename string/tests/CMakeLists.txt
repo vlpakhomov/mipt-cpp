@@ -2,9 +2,15 @@ cmake_minimum_required(VERSION 3.16)
 SET(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/bin")
 SET(TASK_NAME string)
 
-add_compile_options(-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++17)
+string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
+if (build_type STREQUAL san)
+        add_compile_options(-fsanitize=address -fsanitize=undefined)
+        add_link_options(-fsanitize=address -fsanitize=undefined)
+endif()
 
-add_link_options(-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++17)
+add_compile_options(-pedantic -Werror -Wextra -std=c++20)
+
+add_link_options(-pedantic -Werror -Wextra -std=c++20)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})

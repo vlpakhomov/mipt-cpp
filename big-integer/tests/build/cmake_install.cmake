@@ -1,4 +1,4 @@
-# Install script for directory: /home/vladislavp/mipt-cpp/big-integer/tests
+# Install script for directory: /home/vlpakhomov/mipt-cpp/big-integer/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,7 +29,7 @@ endif()
 
 # Install shared libraries without execute permission?
 if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "0")
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
 # Is this installation the result of a crosscompile?
@@ -42,30 +42,30 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer"
-         RPATH "/home/vladislavp/mipt-cpp/big-integer/tests/bin")
+         FILE "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer"
+         RPATH "/home/vlpakhomov/mipt-cpp/big-integer/tests/bin")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer")
+   "/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/vladislavp/mipt-cpp/big-integer/tests/bin" TYPE EXECUTABLE FILES "/home/vladislavp/mipt-cpp/big-integer/tests/build/big-integer")
-  if(EXISTS "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer")
+  file(INSTALL DESTINATION "/home/vlpakhomov/mipt-cpp/big-integer/tests/bin" TYPE EXECUTABLE FILES "/home/vlpakhomov/mipt-cpp/big-integer/tests/build/big-integer")
+  if(EXISTS "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer"
+         FILE "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer"
          OLD_RPATH ":::::::::::::::::::::::::::::::::::::::::::::::"
-         NEW_RPATH "/home/vladislavp/mipt-cpp/big-integer/tests/bin")
+         NEW_RPATH "/home/vlpakhomov/mipt-cpp/big-integer/tests/bin")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/vladislavp/mipt-cpp/big-integer/tests/bin/big-integer")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/vlpakhomov/mipt-cpp/big-integer/tests/bin/big-integer")
     endif()
   endif()
 endif()
@@ -78,5 +78,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vladislavp/mipt-cpp/big-integer/tests/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vlpakhomov/mipt-cpp/big-integer/tests/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

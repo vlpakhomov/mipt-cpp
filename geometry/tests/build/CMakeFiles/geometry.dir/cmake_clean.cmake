@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/geometry.dir/home/vladislavp/mipt-cpp/geometry/src/geometry.cpp.o"
-  "CMakeFiles/geometry.dir/home/vladislavp/mipt-cpp/geometry/src/geometry.cpp.o.d"
+  "CMakeFiles/geometry.dir/home/vlpakhomov/mipt-cpp/geometry/src/geometry.cpp.o"
+  "CMakeFiles/geometry.dir/home/vlpakhomov/mipt-cpp/geometry/src/geometry.cpp.o.d"
   "CMakeFiles/geometry.dir/tests.cpp.o"
   "CMakeFiles/geometry.dir/tests.cpp.o.d"
   "geometry"

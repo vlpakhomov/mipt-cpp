@@ -1,1 +1,1 @@
-/usr/bin/g++ -pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++17 CMakeFiles/string.dir/home/vladislavp/mipt_cpp/string/src/string.cpp.o CMakeFiles/string.dir/tests.cpp.o -o string  -Wl,-rpath,:::::::::::::::::::::::::::::::::::::::::: /usr/lib/libgtest.so.1.13.0 
+/usr/bin/g++ -pedantic -Werror -Wextra -std=c++20 CMakeFiles/string.dir/home/vlpakhomov/mipt-cpp/string/src/string.cpp.o CMakeFiles/string.dir/tests.cpp.o -o string  -Wl,-rpath,:::::::::::::::::::::::::::::::::::::::::: /usr/lib/x86_64-linux-gnu/libgtest.a 

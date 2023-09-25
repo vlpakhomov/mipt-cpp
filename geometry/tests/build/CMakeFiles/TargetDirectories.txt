@@ -1,8 +1,8 @@
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/geometry.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/test.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/edit_cache.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/rebuild_cache.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/list_install_components.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/install.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/install/local.dir
-/home/vladislavp/mipt-cpp/geometry/tests/build/CMakeFiles/install/strip.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/geometry.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/test.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/edit_cache.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/rebuild_cache.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/list_install_components.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/install.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/install/local.dir
+/home/vlpakhomov/mipt-cpp/geometry/tests/build/CMakeFiles/install/strip.dir

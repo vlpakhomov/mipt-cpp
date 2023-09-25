@@ -1,15 +1,15 @@
-==77452== Memcheck, a memory error detector
-==77452== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==77452== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
-==77452== Command: ./big-integer
-==77452== Parent PID: 77239
-==77452== 
-==77452== 
-==77452== HEAP SUMMARY:
-==77452==     in use at exit: 0 bytes in 0 blocks
-==77452==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
-==77452== 
-==77452== All heap blocks were freed -- no leaks are possible
-==77452== 
-==77452== For lists of detected and suppressed errors, rerun with: -s
-==77452== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==11324== Memcheck, a memory error detector
+==11324== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==11324== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==11324== Command: ./big-integer
+==11324== Parent PID: 11027
+==11324== 
+==11324== 
+==11324== HEAP SUMMARY:
+==11324==     in use at exit: 0 bytes in 0 blocks
+==11324==   total heap usage: 5,251 allocs, 5,251 frees, 563,426 bytes allocated
+==11324== 
+==11324== All heap blocks were freed -- no leaks are possible
+==11324== 
+==11324== For lists of detected and suppressed errors, rerun with: -s
+==11324== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

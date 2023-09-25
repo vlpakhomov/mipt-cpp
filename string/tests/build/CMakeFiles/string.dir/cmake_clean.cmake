@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/string.dir/home/vladislavp/mipt_cpp/string/src/string.cpp.o"
-  "CMakeFiles/string.dir/home/vladislavp/mipt_cpp/string/src/string.cpp.o.d"
+  "CMakeFiles/string.dir/home/vlpakhomov/mipt-cpp/string/src/string.cpp.o"
+  "CMakeFiles/string.dir/home/vlpakhomov/mipt-cpp/string/src/string.cpp.o.d"
   "CMakeFiles/string.dir/tests.cpp.o"
   "CMakeFiles/string.dir/tests.cpp.o.d"
   "string"

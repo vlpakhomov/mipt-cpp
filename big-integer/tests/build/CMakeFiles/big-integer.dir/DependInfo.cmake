@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/vladislavp/mipt-cpp/big-integer/src/big-integer.cpp" "CMakeFiles/big-integer.dir/home/vladislavp/mipt-cpp/big-integer/src/big-integer.cpp.o" "gcc" "CMakeFiles/big-integer.dir/home/vladislavp/mipt-cpp/big-integer/src/big-integer.cpp.o.d"
-  "/home/vladislavp/mipt-cpp/big-integer/tests/tests.cpp" "CMakeFiles/big-integer.dir/tests.cpp.o" "gcc" "CMakeFiles/big-integer.dir/tests.cpp.o.d"
+  "/home/vlpakhomov/mipt-cpp/big-integer/src/big-integer.cpp" "CMakeFiles/big-integer.dir/home/vlpakhomov/mipt-cpp/big-integer/src/big-integer.cpp.o" "gcc" "CMakeFiles/big-integer.dir/home/vlpakhomov/mipt-cpp/big-integer/src/big-integer.cpp.o.d"
+  "/home/vlpakhomov/mipt-cpp/big-integer/tests/tests.cpp" "CMakeFiles/big-integer.dir/tests.cpp.o" "gcc" "CMakeFiles/big-integer.dir/tests.cpp.o.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

@@ -1,1 +1,1 @@
-/usr/bin/g++ -pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20 "CMakeFiles/geometry.dir/home/vladislavp/mipt-cpp/geometry/src/geometry.cpp.o" CMakeFiles/geometry.dir/tests.cpp.o -o geometry  -Wl,-rpath,:::::::::::::::::::::::::::::::::::::::::::: /usr/lib/libgtest.so.1.14.0 
+/usr/bin/g++ -pedantic -Werror -Wextra -std=c++20 CMakeFiles/geometry.dir/home/vlpakhomov/mipt-cpp/geometry/src/geometry.cpp.o CMakeFiles/geometry.dir/tests.cpp.o -o geometry  -Wl,-rpath,:::::::::::::::::::::::::::::::::::::::::::: /usr/lib/x86_64-linux-gnu/libgtest.a 
