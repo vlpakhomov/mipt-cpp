@@ -20,11 +20,12 @@ Probably, I will add other useful and more complex features to this implementati
 - Implementation static polymorphism using C++ templates.
 - Implementation information hiding principle using access specifiers.
 - Implementation matrix taking into account mathematical rule (Trace for non square matrix will cause CE, 
-        same for arithmetic operators of matrices with ivalid shape) using partial template specialization and inheritance).
+        same for arithmetic operators of matrices with ivalid shape) using partial template specialization and inheritance.
 - Idiomatic implementation class constructors (copy-and-swap idiom, member initializer list, only non-trivial actions in bogy).
 - Apply using-declaration for introduces a constructors of a base class into the derived class.
 - Well-designed class, id est there are no friend, mutable and etc bad keyword.
-- Use curiously recurring template pattern for using parent's operators overloading in child during the inheritance.   
+- Use curiously recurring template pattern for using parent's operators overloading in child during the inheritance.  
+- Use sanitizers and valgrind for find memory bugs and undefined behaviour. 
 - Following the idiomatic C++ style (not use C functions such as memset, use std toolkit).
 - Use clang-tidy linter for general static code analysis.
 - Use clang-format for reformat code following the Google C++ Code Style.
