@@ -18,6 +18,7 @@ Probably, I will add other useful and more complex features to this implementati
 
 - Implementation encapsulation principle using class methods.
 - Implementation information hiding principle using access specifiers.
+- Use the #pragma preprocessor directive for header guards.
 - Use sanitizers and valgrind for find memory bugs and undefined behaviour.
 - Following the C++ style (not use C functions such as memset, use std toolkit). 
 - Use basic rules and idioms for operator overloading.   

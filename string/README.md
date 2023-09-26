@@ -19,6 +19,7 @@ Probably, I will add other useful and more complex features to this implementati
 - Implementation encapsulation principle using class methods.
 - Implementation information hiding principle using access specifiers.
 - Idiomatic implementation class constructors (copy-and-swap idiom, member initializer list, only non-trivial actions in bogy).
+- Use the #pragma preprocessor directive for header guards.
 - Well-designed class, id est there are no friend, mutable and etc bad keyword.
 - Use sanitizers and valgrind for find memory bugs and undefined behaviour.
 - Following the idiomatic C++ style (not use C functions such as memset, use std toolkit). 

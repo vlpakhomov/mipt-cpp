@@ -22,6 +22,7 @@ Probably, I will add other useful and more complex features to this implementati
 - Implementation matrix taking into account mathematical rule (Trace for non square matrix will cause CE, 
         same for arithmetic operators of matrices with ivalid shape) using partial template specialization and inheritance.
 - Idiomatic implementation class constructors (copy-and-swap idiom, member initializer list, only non-trivial actions in bogy).
+- Use the #pragma preprocessor directive for header guards.
 - Apply using-declaration for introduces a constructors of a base class into the derived class.
 - Well-designed class, id est there are no friend, mutable and etc bad keyword.
 - Use curiously recurring template pattern for using parent's operators overloading in child during the inheritance.  
